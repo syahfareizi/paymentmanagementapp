@@ -45,6 +45,7 @@ export class FormpaymentComponent implements OnInit {
       if(res.result){
       }
       this.addPaymentForm.reset()
+      location.reload()
     })
   }
 }

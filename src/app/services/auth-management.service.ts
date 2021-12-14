@@ -11,8 +11,8 @@ import { Router } from '@angular/router';
 export class AuthManagementService {
   endpoint:string = 'https://syahfareizi-paymentapi.herokuapp.com/api/authmanagement'
   headers = new HttpHeaders().set('Content-Type','application/json')
-  jwtToken:string =''
-  jwtRefreshToken:string =''
+  // jwtToken:string =''
+  // jwtRefreshToken:string =''
 
   constructor(
     private http:HttpClient,
@@ -37,23 +37,29 @@ export class AuthManagementService {
                     .subscribe((res:any)=>{
                       console.log(res)
                       //* ASSIGN JWT KE VARIABLE
-                      this.jwtToken = res.token
-                      this.jwtRefreshToken = res.refreshToken
-                      console.log(this.jwtToken)
-                      console.log(this.jwtRefreshToken)
+                      localStorage.setItem('token',res.token) 
+                      localStorage.setItem('refreshToken',res.refreshToken)
                       this.router.navigate(['/homepage'])
+                      console.log(localStorage)
                     })
   }
-
   //* GET TOKEN
   getToken (){
-    return {token:this.jwtToken,refreshToken:this.jwtRefreshToken}
+    return {token:localStorage.getItem('token'),refreshToken:localStorage.getItem('refreshToken')}
   }
 
   //* CEK STATUS LOGIN
   get isLoggedIn():boolean{
-    return(this.jwtToken!=='')? true:false
+    return(localStorage.getItem('token')!=='')? true:false
   }
+
+  get isOutdated():boolean{
+    return(this.refreshToken())? true:false
+  }
+
+  // get isOutdated():boolean{
+  //   return
+  // }
 
   //* ERROR HANDLER
   errorHandler (err: HttpErrorResponse) {
@@ -63,5 +69,25 @@ export class AuthManagementService {
     else
       return throwError(`Server-side error code: ${err.status}\nMessage: ${err.message}`)
   }
-  
+
+  //* Refresh Token
+  refreshToken() {
+    const token = localStorage.getItem('token');
+    const refreshToken = localStorage.getItem('refreshToken');
+
+    return this.http
+      .post(`${this.endpoint}/refreshtoken`, { token, refreshToken })
+      .pipe(catchError(this.handleError));
+  }
+
+    //* ERROR HANDLER
+    handleError(error:HttpErrorResponse){
+    let msg =''
+    if ( error.error instanceof ErrorEvent){
+      msg = error.error.message
+    } else {
+      msg =`Error code :${error.status}\n Message: ${error.message}`
+    }
+    return throwError(msg)
+  }
 }
