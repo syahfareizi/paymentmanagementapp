@@ -50,16 +50,9 @@ export class AuthManagementService {
 
   //* CEK STATUS LOGIN
   get isLoggedIn():boolean{
-    return(localStorage.getItem('token')!=='')? true:false
+    const token = localStorage.getItem('token')
+    return(token!==null)? true:false
   }
-
-  get isOutdated():boolean{
-    return(this.refreshToken())? true:false
-  }
-
-  // get isOutdated():boolean{
-  //   return
-  // }
 
   //* ERROR HANDLER
   errorHandler (err: HttpErrorResponse) {

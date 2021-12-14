@@ -19,6 +19,7 @@ export class TabelpaymentComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllPayments()
+    console.log(localStorage)
   }
 
 

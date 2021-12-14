@@ -15,6 +15,7 @@ export class RegisterpageComponent implements OnInit {
     private router:Router) { }
 
   ngOnInit(): void {
+    
   }
 
   addUserForm = new FormGroup({

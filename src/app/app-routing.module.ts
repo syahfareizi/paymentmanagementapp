@@ -10,7 +10,7 @@ const routes: Routes = [
   {path:'',redirectTo:'/homepage', pathMatch:'full'},
   {path:'register', component:RegisterpageComponent},
   {path:'login', component:LoginpageComponent},
-  {path:'update/:id', component:UpdatepageComponent},
+  {path:'update/:id', component:UpdatepageComponent, canActivate:[AuthguardGuard]},
   {path:'homepage', component:HomepageComponent , canActivate:[AuthguardGuard]}
 
   // {path:'homepage',component:GetemployeeComponent},
