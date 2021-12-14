@@ -1,0 +1,30 @@
+<div class="data-tables datatable-dark m-3">
+    <table id="dataTable" class="display" style="width:100%">
+        <thead class="thead-dark">
+            <tr>
+                <th>No</th>
+                <th>Card Owner Name</th>
+                <th>Card Number</th>
+                <th>Expiration Date</th>
+                <th>Manage</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let payment of allPayments; let i=index">
+                <td>{{i+1}}</td>
+                <td>{{payment.cardOwnerName}}</td>
+                <td>{{payment.cardNumber}}</td>
+                <td>{{payment.expirationDate}}</td>
+                <td>
+                    <button [routerLink]="['/update/',payment.id]" class="btn btn-primary m-2"> Update Data </button>
+                    <button (click)="confirmDelete(payment.id!)" class="btn btn-danger m-2"> Delete Data </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="container d-flex justify-content-right m-auto">
+    <button (click)="getAllPayments()" class="btn btn-warning m-2">
+        Refresh
+    </button>
+</div>

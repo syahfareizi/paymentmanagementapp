@@ -1,0 +1,34 @@
+<div class="auth-wrapper">
+    <form class="form-addPayment" [formGroup]="addPaymentForm" (ngSubmit)="addPayment()">
+        <h3 class="h3 mb-3 font-weight-normal text-center">Add New Payment</h3>
+        <div class="form-group mt-3">
+            <label >Card Owner Name :</label>
+            <input type="text" class="form-control" formControlName="cardOwnerName" placeholder="Enter Card Owner Name : " required>
+            <span style="color: red;" *ngIf="cardOwnerName && cardOwnerName.touched && cardOwnerName.invalid">
+                Card Owner Name is required. Min length is 5
+            </span>
+        </div>
+        <div class="form-group mt-3">
+            <label >Card Number :</label>
+            <input type="text" class="form-control" formControlName="cardNumber" placeholder="Enter Card Number : " required>
+            <span style="color: red;" *ngIf="cardNumber && cardNumber.touched && cardNumber.invalid">
+                cardNumber is required. 
+            </span>
+        </div>
+        <div class="form-group mt-3">
+            <label >Expiration Date :</label>
+            <input type="text" class="form-control" formControlName="expirationDate" placeholder="Enter Expiration Date (MM/YY) : " required>
+            <span style="color: red;" *ngIf="expirationDate && expirationDate.touched && expirationDate.invalid">
+                expirationDate is required. 
+            </span>
+        </div>
+        <div class="form-group mt-3">
+            <label >Security Code :</label>
+            <input type="password" class="form-control" formControlName="securityCode" placeholder="Enter Security Code : " required>
+            <span style="color: red;" *ngIf="securityCode && securityCode.touched && securityCode.invalid">
+                securityCode is required. 
+            </span>
+        </div>
+        <button type="submit" class="btn btn-block btn-primary mt-3">Add Payment</button>
+    </form>
+</div>

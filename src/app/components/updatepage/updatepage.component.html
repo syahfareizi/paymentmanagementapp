@@ -1,0 +1,40 @@
+<div index="selectedPayment">
+    <span>
+        <h3>Current Payment</h3>
+    </span>
+    <span>
+        <h4>{{selectedPayment.cardOwnerName}}</h4>
+    </span>
+    <span>Card Number :  {{selectedPayment.cardNumber}}</span>
+    <br>
+    <span>expiration Date :  {{selectedPayment.expirationDate}}</span>
+    <br>
+</div>
+<br>
+<div class="auth-wrapper">
+    <form class="form-updatePayment" [formGroup]="updatePaymentForm" (ngSubmit)="updatePayment()">
+        <h3 class="h3 mb-3 font-weight-normal text-center">Update Current Payment</h3>
+        <div class="form-group mt-3">
+            <label >Card Owner Name :</label>
+            <input type="text" class="form-control" formControlName="cardOwnerName" placeholder="Enter cardOwnerName : " required>
+            <span style="color: red;" *ngIf="cardOwnerName && cardOwnerName.touched && cardOwnerName.invalid">
+                Card Owner Name is required. Min length is 5
+            </span>
+        </div>
+        <div class="form-group mt-3">
+            <label >Card Number :</label>
+            <input type="text" class="form-control" formControlName="cardNumber" placeholder="Enter cardNumber : " required>
+            <span style="color: red;" *ngIf="cardNumber && cardNumber.touched && cardNumber.invalid">
+                cardNumber is required. 
+            </span>
+        </div>
+        <div class="form-group mt-3">
+            <label >Expiration Date :</label>
+            <input type="text" class="form-control" formControlName="expirationDate" placeholder="Enter expirationDate (MM/YY): " required>
+            <span style="color: red;" *ngIf="expirationDate && expirationDate.touched && expirationDate.invalid">
+                expirationDate is required. 
+            </span>
+        </div>
+        <button type="submit" class="btn btn-block btn-primary mt-3">Update Payment</button>
+    </form>
+</div>

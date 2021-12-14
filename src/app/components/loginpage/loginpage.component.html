@@ -1,0 +1,24 @@
+<div class="auth-wrapper">
+    <form class="form-loginForm" [formGroup]="loginForm" (ngSubmit)="loginUser()">
+        <h3 class="h3 mb-3 font-weight-normal text-center">Login Page</h3>
+        <div class="form-group mt-3">
+            <label >Email :</label>
+            <input type="email" class="form-control" formControlName="Email" placeholder="Enter Email : " required>
+            <span style="color: red;" *ngIf="Email && Email.touched && Email.invalid">
+                Email is required. 
+            </span>
+        </div>
+        <div class="form-group mt-3">
+            <label >Password :</label>
+            <input type="password" class="form-control" formControlName="Password" placeholder="Enter Password: " required>
+            <span style="color: red;" *ngIf="Password && Password.touched && Password.invalid">
+                Password is required. 
+            </span>
+        </div>
+        <button type="submit" class="btn btn-block btn-primary mt-3">Login</button>
+    </form>
+</div>
+<br>
+<div>
+    <span> Doesn't Have Any Account ? <a [routerLink]="['/register']">Register Now </a></span>
+</div>
