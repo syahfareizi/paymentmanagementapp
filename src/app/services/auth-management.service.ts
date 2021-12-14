@@ -67,7 +67,6 @@ export class AuthManagementService {
   refreshToken() {
     const token = localStorage.getItem('token');
     const refreshToken = localStorage.getItem('refreshToken');
-
     return this.http
       .post(`${this.endpoint}/refreshtoken`, { token, refreshToken })
       .pipe(catchError(this.handleError));

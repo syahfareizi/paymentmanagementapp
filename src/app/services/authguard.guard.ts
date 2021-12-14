@@ -19,13 +19,14 @@ export class AuthguardGuard implements CanActivate {
       window.alert("Access denied Please Login");
       this.router.navigate(['login'])
     } else {
-    let result: any = await this.authService.refreshToken().toPromise();
-    console.log(result['success'])
-    if (result['success']) {
-      window.alert("Login Session Expired, Please Login");
-      this.router.navigate(['login'])
-    }
-    }
+      let result: any = await this.authService.refreshToken().toPromise();
+      console.log(result)
+      console.log(result.success)
+      if (!result.success) {
+        window.alert("Login Session Expired, Please Login");
+        this.router.navigate(['login'])
+        }
+      }
     return true
   }
   
