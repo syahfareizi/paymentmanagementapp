@@ -21,7 +21,7 @@ export class AuthguardGuard implements CanActivate {
     } else {
     let result: any = await this.authService.refreshToken().toPromise();
     console.log(result['success'])
-    if (!result['success']) {
+    if (result['success']) {
       window.alert("Login Session Expired, Please Login");
       this.router.navigate(['login'])
     }
